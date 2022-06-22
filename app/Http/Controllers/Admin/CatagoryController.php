@@ -50,7 +50,7 @@ $filename=$orgininalPhoto. "_" .time(). "." .$originalPhotoExtension;
 $photo=$request->file('photo');
 $fileResize=Image::make($photo->getRealPath());
 $fileResize->resize(300,300);
-$fileResize->save(public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'catagoryPhoto'.DIRECTORY_SEPARATOR.$filename));
+$fileResize->save('storage/catagoryPhoto/'.$filename);
 // Store in data base
 $data['photo']=$filename;
 $save=Catagory::create($data);
@@ -108,7 +108,7 @@ $filename=$orgininalPhoto. "_" .time(). "." .$originalPhotoExtension;
 $photo=$request->file('photo');
 $fileResize=Image::make($photo->getRealPath());
 $fileResize->resize(300,300);
-$fileResize->save(public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'catagoryPhoto'.DIRECTORY_SEPARATOR.$filename));
+$fileResize->save('storage/catagoryPhoto/'.$filename);
 
 // Update the catagory
 $update=$catagory->update

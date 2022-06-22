@@ -8,15 +8,18 @@
 <form method="post" enctype="multipart/form-data" action="{{route('product-update',$product->id)}}">
 @csrf   
 @method('PUT')
+
 <div class="row">
-<div class="col-md-8 offset-2">
+<div class="col-md-8">
 <h3 class="text-center">Welcome To The Product Section</h3>
 </div>
+<div class="col-md-4">
 @if($product->photo)
 <img class="img-responsive float-end" style="border:1px solid white;border-radius:10px;" height="150px;" src="{{asset('storage/productPhoto/'.$product->photo)}}" alt="">
 @endif
 </div>
-
+</div>
+<hr>
 <div class="row">
 <div class="col-md-4">
 <div class="form-group">

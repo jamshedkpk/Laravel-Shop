@@ -3,21 +3,23 @@
 <div class="container mt-5">
 
 <div class="row">
-<div class="col-md-6 offset-3">
-<h4>
-Welcome To The Catagory Section
-</h4>
-</div>
-</div>
-<hr>
-
-<div class="row">
 <div class="col-md-12">
 <div class="card">
 <div class="card-body">
 <form action="{{route('catagory-update',$catagory->id)}}" method="post"  enctype="multipart/form-data">
 @csrf
 @method('PUT')
+<div class="row">
+<div class="col-md-8">
+<h3 class="text-center">Welcome To The Product Section</h3>
+</div>
+<div class="col-md-4">
+@if($catagory->photo)
+<img class="img-responsive float-end" style="border:1px solid white;border-radius:10px;" height="150px;" src="{{asset('storage/catagoryPhoto/'.$catagory->photo)}}" alt="">
+@endif
+</div>
+</div>
+<hr>
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">

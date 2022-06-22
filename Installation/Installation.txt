@@ -31,7 +31,13 @@ perform crud operation over catagory
 
 To upload image in your project install image intervention
 composer require intervention/image
-Find the providers in config >> app.php file and register the ImageServiceProvider.
+Find the providers in config >> app.php file and register the ImageServiceProvider and allias etc...
+If it says GD library was not found than go to ini.php file and un comment DG extension....
+
+Perform crud operation on Catagory
+Perform crud operation on product
+
+Create a controller for front end called FrontEndController and inside views create index.blade.php insdie frontend
 
 
 
