@@ -1,0 +1,42 @@
+Install new laravel 
+composer create-project laravel/laravel example-app
+
+Install Bootstrap
+composer require laravel/ui
+php artisan ui bootstrap --auth
+
+Install Node Package Manager
+npm install
+npm run dev
+
+Create Role model
+link Role model to User model
+Create checkAdmin method inside User model that will return name of role
+Create AdminMiddleware
+Call checkAdmin method from AdminMiddleware
+Register AdminMiddleware inside Kernal.php
+Create a function authenticated inside app\http\controllers\auth\LoginController 
+for checking weither user is admin or user
+Create route for admin in web.php
+
+Add Admin Panel with logout functionality
+Create Admin Folder inside views and a file index.blade.php
+Create Admin Layout inside layouts
+extends index.blade.php from this admin layout
+
+create date format and time format pattern inside App\Providers\AppServiceProvider.php
+
+Create model, factory, seeder, controller and migration for catagory
+perform crud operation over catagory
+
+To upload image in your project install image intervention
+composer require intervention/image
+Find the providers in config >> app.php file and register the ImageServiceProvider.
+
+
+
+
+
+
+
+
