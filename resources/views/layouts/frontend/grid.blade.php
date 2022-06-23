@@ -15,7 +15,7 @@ body {
 }
 .container .product-item
 {
-    min-height: 450px;
+    min-height: 100px;
     border: none;
     overflow: hidden;
     position: relative;
@@ -24,7 +24,7 @@ body {
 
 .container .product-item .product {
     width: 100%;
-    height: 350px;
+    height: 200px;
     position: relative;
     overflow: hidden;
     cursor: pointer
@@ -32,7 +32,7 @@ body {
 
 .container .product-item .product img {
     width: 100%;
-    height: 80%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -114,18 +114,31 @@ body {
     background-color: #bb3535;
     color: #fff
 }
+.product img
+{
+border-radius:10px;
+}
+.btn-primary:hover
+{
+background-color:green;
+}
 </style>
 <link rel="stylesheet" href="">
 <script src=""></script>
+<!-- Start of Latest Product-->
 <div class="container bg-white">
-    <h2 class="text-center">Latest Products</h2>
-    <hr>
-    <div class="row">
-        @foreach($products as $product)
+&nbsp;
+<h3 class="text-center text-primary">Latest Products</h3>
+<hr>
+<div class="row">
+<div class="col-md-3">
+</div>
+<div class="col-md-9">
+   <div class="row">
+   @foreach($products as $product)
         <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
         <div class="card">
         <div class="card-body">
-
         <div class="product"> <img src="{{asset('storage/productPhoto/'.$product->photo)}}" height="200px;" class="img-responsive" alt="">
                 <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
                     <li class="icon"><span class="fas fa-expand-arrows-alt"></span></li>
@@ -133,9 +146,14 @@ body {
                     <li class="icon"><span class="fas fa-shopping-bag"></span></li>
                 </ul>
             </div>
-         <div class="title pt-4 pb-1">{{ $product->name }}</div>
+         <h4 class="mt-2 text-center text-primary">{{ $product->name }}</h4>
             <div class="d-flex align-content-center justify-content-center"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> </div>
-            <div class="price">Selling Price : {{$product->selling_price}}</div>
+            <div class="price text-center text-success">Price : {{$product->selling_price}}</div>
+            <div class="price text-center text-danger">
+            <s>
+            Price : {{$product->selling_price}}
+            </s>    
+            </div>
             <button class="btn btn-primary w-100">Add To Cart</button>
             </div>
         </div>
@@ -143,3 +161,6 @@ body {
             @endforeach
     </div>
 </div>
+</div>
+</div>
+<!-- End Start of Latest Product-->
