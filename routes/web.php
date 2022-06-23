@@ -3,18 +3,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CatagoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\FrontEndController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/',[FrontEndController::class,'index']);
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Routes for admin
 Route::middleware(['auth','isAdmin'])->group(function(){
-Route::get('/dashboard',[AdminController::class,'index'])->name('name');
+Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
 
 // Routes for catagory
 Route::get('/catagory',[CatagoryController::class,'index'])->name('catagory-index');

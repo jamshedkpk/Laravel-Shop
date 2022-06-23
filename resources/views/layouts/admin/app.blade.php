@@ -420,7 +420,6 @@ font-size:20px !important;
 <script src="{{ mix('js/app.js') }}"></script>
 <!--Jquery -->
 <script src="{{ asset('js/Jquery.min.js') }}"></script>
-
 <script src="{{asset('template_admin/assets/vendors/chart.js/Chart.min.js')}}"></script>
 <script src="{{asset('template_admin/assets/vendors/progressbar.js/progressbar.min.js')}}"></script>
 <script src="{{asset('template_admin/assets/vendors/jvectormap/jquery-jvectormap.min.js')}}"></script>
