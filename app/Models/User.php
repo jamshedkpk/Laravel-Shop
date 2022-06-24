@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+
 
 class User extends Authenticatable
 {
@@ -56,5 +58,9 @@ public function checkRole()
     ->first();
     return $role->name;
 }
-
+// Each user has many products to buy
+public function products()
+{
+return $this->belongsToMany(Product::class,'carts','product_id','user_id');
+}
 }

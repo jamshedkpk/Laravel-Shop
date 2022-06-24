@@ -13,11 +13,18 @@
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <script src="{{asset('js/app.js')}}"></script>
   <!-- <script src="{{asset('frontend/popper.min.js')}}"></script> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+body
+{    
+font-family: 'Open Sans', sans-serif;
+}    
+</style>
 </head>
 <body>
 @include('layouts.frontend.navbar')
-@include('layouts.frontend.slider')
-@include('layouts.frontend.grid')  
-@include('layouts.frontend.featured')
+@yield('content')
 </body>
 </html>

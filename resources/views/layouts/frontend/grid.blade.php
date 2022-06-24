@@ -131,12 +131,26 @@ background-color:green;
 <h3 class="text-center text-primary">Latest Products</h3>
 <hr>
 <div class="row">
-<div class="col-md-3">
+<div class="col-md-2">
+<ul class="navbar-nav">
+<li class="nav-item" style="margin-left:20px;">
+<h4 class="text-center text-primary">Catagories</h4>
+</li>
+<li class="dropdown-divider"></li>
+@foreach($catagories as $catagory)
+<li class="nav-item" style="margin-left:20px;">
+<a href="{{route('catagory-product',$catagory->id)}}" class="nav-link active">{{ $catagory->name }}</a>
+</li>
+<li class="dropdown-divider"></li>
+@endforeach
+</ul>
 </div>
-<div class="col-md-9">
-   <div class="row">
+<div class="col-md-10">
+@if(!$products->isEmpty())
+<div class="row">
    @foreach($products as $product)
         <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+        <a href="{{url('product-detail/'.$product->slug,$product->id)}}">
         <div class="card">
         <div class="card-body">
         <div class="product"> <img src="{{asset('storage/productPhoto/'.$product->photo)}}" height="200px;" class="img-responsive" alt="">
@@ -157,9 +171,16 @@ background-color:green;
             <button class="btn btn-primary w-100">Add To Cart</button>
             </div>
         </div>
+        </a>
             </div>
             @endforeach
     </div>
+@else
+<h4 class="text-center">No Data Were Found</h4>
+<div class="img-thumbnail">
+<img class="img-responsive" src="{{asset('template_admin/assets/images/empty.png')}}" alt="" height="300px" width="800px;">
+</div>
+@endif
 </div>
 </div>
 </div>

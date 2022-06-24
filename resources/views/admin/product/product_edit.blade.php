@@ -86,9 +86,9 @@
 </div>
 <div class="col-md-4">
 <div class="form-group">
-<label for="tax">Tax :</label>
-<input class="form-control" type="text" name="tax" id="tax" placeholder="Enter Product Tax" value="{{$product->tax}}">
-@error('tax')
+<label for="slug">slug :</label>
+<input class="form-control" type="text" name="slug" id="slug" placeholder="Enter Product slug" value="{{$product->slug}}">
+@error('slug')
 <span class="text-danger">
 {{ $message }}
 </span>
@@ -134,7 +134,7 @@
 <div class="col-md-4">
 <div class="form-group">
 <label for="photo">Photo :</label>
-<input class="form-control" type="file" name="photo" id="photo" placeholder="Enter Product Tax" value="{{old('photo')}}">
+<input class="form-control" type="file" name="photo" id="photo" placeholder="Enter Product slug" value="{{old('photo')}}">
 @error('photo')
 <span class="text-danger">
 {{ $message }}

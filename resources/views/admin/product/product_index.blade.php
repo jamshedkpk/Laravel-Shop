@@ -50,7 +50,7 @@ Photo
 Quantity
 </th>
 <th>
-Tax
+slug
 </th>
 <th>
 Status
@@ -87,7 +87,7 @@ Delete
 {{ $product->quantity }}
 </td>
 <td>
-{{ $product->tax }}
+{{ $product->slug }}
 </td>
 <td>
 {{ $product->status==1? 'Available' : 'Out Of Stock' }}

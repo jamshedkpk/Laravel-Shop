@@ -4,12 +4,16 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CatagoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\CartController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/',[FrontEndController::class,'index']);
+Route::get('/',[FrontEndController::class,'index'])->name('homepage');
+Route::get('/catagory/products/{id}',[FrontEndController::class,'searchCatagoryProduct'])->name('catagory-product');
+Route::get('/product-detail/{productSlug}/{id}',[FrontEndController::class,'productDetail'])->name('product-detail');
+Route::get('/cart',[CartController::class,'index'])->name('cart-index');
 
 Auth::routes();
 

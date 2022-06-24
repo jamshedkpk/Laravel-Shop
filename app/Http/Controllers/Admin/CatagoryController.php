@@ -25,7 +25,7 @@ public function store(Request $request)
 {
 // Validate catagory
 $data=$this->validate($request,[
-'name'=>'required|regex:/^[a-zA-Z0-9 ]+$/',
+'name'=>'required|regex:/^[a-zA-Z ]+[-]?[_]?[.]?[a-zA-Z0-9 ]*$/',
 'slug'=>'required',
 'description'=>'required',
 'meta_title'=>'required',
@@ -73,7 +73,7 @@ public function update(Request $request, $id)
 {
 // Validate catagory
 $this->validate($request,[
-'name'=>'required|regex:/^[a-zA-Z0-9 ]+$/',
+'name'=>'required|regex:/^[a-zA-Z ]+[-]?[_]?[.]?[a-zA-Z0-9 ]*$/',
 'slug'=>'required',
 'description'=>'required',
 'meta_title'=>'required',

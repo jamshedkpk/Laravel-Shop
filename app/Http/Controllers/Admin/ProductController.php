@@ -31,12 +31,12 @@ public function store(Request $request)
 {
 // Validate product
 $data=$this->validate($request,[
-'name'=>'required|regex:/^[a-zA-Z ]+[_]?[-]?[a-zA-Z0-9 ]*$/',
+'name'=>'required|regex:/^[a-zA-Z ]+[-]?[_]?[.]?[a-zA-Z0-9 ]*$/',
 'original_price'=>'required|numeric|min:1|max:100000',
 'selling_price'=>'required|numeric|min:1|max:100000',
 'description'=>'required',
 'quantity'=>'required|numeric|min:1|max:1000',
-'tax'=>'required|numeric|min:1|max:100',
+'slug'=>'required|regex:/^[a-zA-Z ]+[-]?[_]?[.]?[a-zA-Z0-9 ]*$/',
 'catagory_id'=>'required|notIn:null',
 'status'=>'required|in:0,1',
 'photo'=>'required|image'
@@ -78,12 +78,12 @@ return view('admin.product.product_edit')->with(['product'=>$product,'catagories
 public function update(Request $request , $id)
 {
 $data=$this->validate($request,[
-'name'=>'required|regex:/^[a-zA-Z ]+[_]?[-]?[a-zA-Z0-9 ]*$/',
+'name'=>'required|regex:/^[a-zA-Z ]+[-]?[_]?[.]?[a-zA-Z0-9 ]*$/',
 'original_price'=>'required|numeric|min:1|max:100000',
 'selling_price'=>'required|numeric|min:1|max:100000',
 'description'=>'required',
 'quantity'=>'required|numeric|min:1|max:1000',
-'tax'=>'required|numeric|min:1|max:100',
+'slug'=>'required|regex:/^[a-zA-Z ]+[-]?[_]?[.]?[a-zA-Z0-9 ]*$/',
 'catagory_id'=>'required|notIn:null',
 'status'=>'required|in:0,1',
 'photo'=>'image'
@@ -120,7 +120,7 @@ $update=$product->update
 'selling_price'=>$request->selling_price,
 'description'=>$request->description,
 'quantity'=>$request->quantity,
-'tax'=>$request->tax,
+'slug'=>$request->slug,
 'catagory_id'=>$request->catagory_id,
 'status'=>$request->status,
 'photo'=>$fileName,
@@ -139,7 +139,7 @@ $update=$product->update
 'selling_price'=>$request->selling_price,
 'description'=>$request->description,
 'quantity'=>$request->quantity,
-'tax'=>$request->tax,
+'slug'=>$request->slug,
 'catagory_id'=>$request->catagory_id,
 'status'=>$request->status,
 ]);

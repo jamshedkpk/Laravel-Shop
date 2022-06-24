@@ -7,11 +7,12 @@ class CatagoryFactory extends Factory
 {
 public function definition()
 {
+$name=$this->faker->name();
 return 
 [
-'name'=>$this->faker->name,
-'slug'=>$this->faker->url,
-'description'=>$this->faker->text,
+'name'=>$name,
+'slug'=>$name,
+'description'=>$this->faker->text(300),
 'meta_title'=>'Here is your Title',
 'meta_keyword'=>'Here is your Keywords',
 'meta_description'=>'Here is your Description',

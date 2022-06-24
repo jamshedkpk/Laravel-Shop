@@ -10,11 +10,11 @@ public function up()
 Schema::create('products', function (Blueprint $table) {
 $table->id();
 $table->string('name');
+$table->string('slug');
 $table->string('original_price');
 $table->string('selling_price');
-$table->string('description');
+$table->text('description');
 $table->string('quantity');
-$table->string('tax');
 $table->foreignId('catagory_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
 $table->tinyInteger('status');
 $table->text('photo');
