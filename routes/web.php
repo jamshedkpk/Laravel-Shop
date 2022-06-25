@@ -14,6 +14,7 @@ Route::get('/',[FrontEndController::class,'index'])->name('homepage');
 Route::get('/catagory/products/{id}',[FrontEndController::class,'searchCatagoryProduct'])->name('catagory-product');
 Route::get('/product-detail/{productSlug}/{id}',[FrontEndController::class,'productDetail'])->name('product-detail');
 Route::get('/cart',[CartController::class,'index'])->name('cart-index');
+Route::post('/cart/store',[CartController::class,'addProductToCart'])->name('cart-store');
 
 Auth::routes();
 

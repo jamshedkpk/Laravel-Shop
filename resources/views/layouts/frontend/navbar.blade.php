@@ -1,3 +1,8 @@
+<?php 
+// Display cart items from a static function
+use App\Http\Controllers\CartController;
+$items=CartController::countCartProduct();
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container-fluid">
 <button
@@ -79,7 +84,14 @@ Sign Out
 @csrf
 </form>
 @endguest
-
+<li class="nav-item">
+<a class="nav-link active" aria-current="page" href="{{route('cart-index')}}">
+<strong>
+<i class='fa fa-shopping-cart'></i>
+&nbsp;Cart : {{ $items ? $items : '0' }}
+</strong>
+</a>
+</li>
 
 </ul>
 <form class="d-flex input-group w-auto">

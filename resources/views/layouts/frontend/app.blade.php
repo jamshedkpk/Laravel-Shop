@@ -12,6 +12,8 @@
   <!-- Bootstrap from app.css-->  
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <script src="{{asset('js/app.js')}}"></script>
+  <script src="{{asset('template_admin/assets/js/sweetalert.min.js')}}"></script>
+
   <!-- <script src="{{asset('frontend/popper.min.js')}}"></script> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,5 +28,6 @@ font-family: 'Open Sans', sans-serif;
 <body>
 @include('layouts.frontend.navbar')
 @yield('content')
+@yield('extra-js')
 </body>
 </html>

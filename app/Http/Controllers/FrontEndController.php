@@ -18,7 +18,7 @@ return view('layouts.frontend.product')->with(['products'=>$products,'catagories
 public function searchCatagoryProduct($id)
 {
 $catagories=Catagory::where(['status'=>1])->get();
-$products=Product::where(['catagory_id'=>$id])->get();
+$products=Product::where(['catagory_id'=>$id,'status'=>1])->get();
 return view('layouts.frontend.catagory')->with(['catagories'=>$catagories,'products'=>$products]);    
 }
 

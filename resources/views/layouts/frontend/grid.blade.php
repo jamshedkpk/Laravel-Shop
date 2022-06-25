@@ -150,7 +150,8 @@ background-color:green;
 <div class="row">
    @foreach($products as $product)
         <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
-        <a href="{{url('product-detail/'.$product->slug,$product->id)}}">
+    <!-- Redirect to detail product page-->
+        <a href="{{url('product-detail/'.$product->slug,$product->id)}}" style="text-decoration:none;">
         <div class="card">
         <div class="card-body">
         <div class="product"> <img src="{{asset('storage/productPhoto/'.$product->photo)}}" height="200px;" class="img-responsive" alt="">
@@ -160,7 +161,7 @@ background-color:green;
                     <li class="icon"><span class="fas fa-shopping-bag"></span></li>
                 </ul>
             </div>
-         <h4 class="mt-2 text-center text-primary">{{ $product->name }}</h4>
+         <h4 class="mt-2 text-center text-primary name">{{substr($product->name,0,14) }}</h4>
             <div class="d-flex align-content-center justify-content-center"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> </div>
             <div class="price text-center text-success">Price : {{$product->selling_price}}</div>
             <div class="price text-center text-danger">
@@ -168,10 +169,15 @@ background-color:green;
             Price : {{$product->selling_price}}
             </s>    
             </div>
+            <form action="{{route('cart-store')}}" method="post">
+            @csrf
+            <input type="hidden" value="{{$product->id}}" name="id">
             <button class="btn btn-primary w-100">Add To Cart</button>
-            </div>
+            </form>
+        </div>
         </div>
         </a>
+
             </div>
             @endforeach
     </div>
@@ -185,3 +191,15 @@ background-color:green;
 </div>
 </div>
 <!-- End Start of Latest Product-->
+
+@if($message=Session::get('product-exist'))
+<script>
+swal({
+  title: "Fail To Add Product",
+  text: "{{$message}}",
+  icon: "error",
+  buttons: true,
+  dangerMode: true,
+})
+</script>
+@endif

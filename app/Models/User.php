@@ -61,6 +61,6 @@ public function checkRole()
 // Each user has many products to buy
 public function products()
 {
-return $this->belongsToMany(Product::class,'carts','product_id','user_id');
+return $this->belongsToMany(Product::class,'carts','user_id','product_id');
 }
 }
