@@ -203,3 +203,15 @@ swal({
 })
 </script>
 @endif
+
+@if($message=Session::get('product-added-to-cart'))
+<script>
+swal({
+title: "Good job!",
+text: "{{ $message }}",
+icon: "success",
+timer:2000,  
+button: "OK",
+});
+</script>
+@endif

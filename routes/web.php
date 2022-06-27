@@ -11,10 +11,18 @@ use App\Http\Controllers\CartController;
 // });
 
 Route::get('/',[FrontEndController::class,'index'])->name('homepage');
+// Get product of specific catagory by using catagory id
 Route::get('/catagory/products/{id}',[FrontEndController::class,'searchCatagoryProduct'])->name('catagory-product');
+// Get product detail by using product id
 Route::get('/product-detail/{productSlug}/{id}',[FrontEndController::class,'productDetail'])->name('product-detail');
+// Get all products in the cart of a specific user
 Route::get('/cart',[CartController::class,'index'])->name('cart-index');
+// Store new product in the cart
 Route::post('/cart/store',[CartController::class,'addProductToCart'])->name('cart-store');
+// Delete a product from the cart
+Route::delete('/cart/delete/{id}',[CartController::class,'destroy'])->name('cart-delete');
+// Get all products in the cart of a specific user by ajax call
+Route::get('/cart/products',[CartController::class,'searchCartRecord'])->name('cart-product');
 
 Auth::routes();
 

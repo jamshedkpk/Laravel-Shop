@@ -19,7 +19,7 @@ $userid=Auth::id();
 $products=Cart::join('products','carts.product_id','=','products.id')
 ->join('users','carts.user_id','=','users.id')
 ->where('carts.user_id','=', $userid)
-->get(['products.name','products.photo','products.selling_price','carts.quantity']);
+->get(['products.id','products.name','products.photo','products.selling_price','carts.quantity']);
 return view('layouts.frontend.cart')->with(['products'=>$products]);    
 }
 else
@@ -55,7 +55,7 @@ $obj->product_id=$productid;
 $save=$obj->save();
 if($save)
 {
-return redirect()->route('cart-index')->with(['product-added-to-cart'=>'Product is successfully added to Cart']);
+return redirect()->route('homepage')->with(['product-added-to-cart'=>'Product is successfully added to Cart']);
 }    
 }
 }    
@@ -68,12 +68,34 @@ $count=Cart::where(['user_id'=>$userid])->count();
 return $count;
 }
 
+public function destroy($id)
+{
+$userid=Auth::id();
+$cart=Cart::where(['user_id'=>$userid,'product_id'=>$id]);
+$delete=$cart->delete();
+if($delete)
+{
+return response()->json(['cart-product-deleted'=>'Cart Product is successfully Deleted']);
+}    
 }
-
-
-// If user is login then he can add product to cart
-if(!Auth::id())
+public function searchCartRecord()
+{
+// To check user is login or not
+if(Auth::id())
+{
+// Get user id 
+$userid=Auth::id();
+// Select the product from cart table which is added by user
+$products=Cart::join('products','carts.product_id','=','products.id')
+->join('users','carts.user_id','=','users.id')
+->where('carts.user_id','=', $userid)
+->get(['products.id','products.name','products.photo','products.selling_price','carts.quantity']);
+return response()->json(['products'=>$products]);
+}
+else
 {
 return redirect()->route('login');
 }
 
+}
+}
