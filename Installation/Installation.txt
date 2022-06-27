@@ -54,7 +54,8 @@ Perform ajax operations to Delete, Update etc cart product
 
 For Pagination go to Providers\AppServiceProvider
 and inside boot method type Paginator::useBootstrap();
-also add namespace 
+also add namespace use Illuminate\Pagination\Paginator;
+
 
 
 

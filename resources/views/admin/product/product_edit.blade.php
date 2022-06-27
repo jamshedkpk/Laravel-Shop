@@ -101,7 +101,7 @@
 <select name="catagory_id" id="catagory_id" class="form-control form-select">
 <option value="null">Select A Catagory</option>
 @foreach($catagories as $catagory)
-<option value="{{ $catagory->id }}" {{ $product->catagory_id==$product->catagory_id ? 'selected' : '' }}>
+<option value="{{ $catagory->id }}" {{ $catagory->id==$product->catagory_id ? 'selected' : '' }}>
 {{ $catagory->name }}
 </option>
 @endforeach
