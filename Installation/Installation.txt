@@ -47,7 +47,14 @@ Integrate owl slider ofter it from the link https://owlcarousel2.github.io/OwlCa
 Integrate Google Fonts from the link https://fonts.google.com/specimen/Open+Sans#standard-styles
 
 Create a page for product detail
+Perform operation to display product
 
+Create Cart Model
+Perform ajax operations to Delete, Update etc cart product
+
+For Pagination go to Providers\AppServiceProvider
+and inside boot method type Paginator::useBootstrap();
+also add namespace 
 
 
 

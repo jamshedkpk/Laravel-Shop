@@ -181,6 +181,7 @@ background-color:green;
             </div>
             @endforeach
     </div>
+    {{ $products->links() }}
 @else
 <h4 class="text-center">No Data Were Found</h4>
 <div class="img-thumbnail">
