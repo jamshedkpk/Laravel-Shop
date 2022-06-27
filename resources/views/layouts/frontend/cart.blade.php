@@ -193,6 +193,36 @@ $('#cartBody').html(
 }
 //End of search cart data throught ajax
 
+countCartProducts();
+// Start of CountCartProducts function
+function countCartProducts()
+{
+// store csrf token in token variable
+var token = $("meta[name='csrf-token']").attr("content");
+// Start of ajax
+$.ajax
+({
+// Url where you want to send data
+url: "/cart/count",
+// Method of sending data
+type: 'GET',
+// Format of data
+dataType:'json',
+// To clear cache
+cache:false,
+// Data which you want to send
+data: {
+"_token": token,
+},
+success:function(response)
+{
+$('#cartProducts').html(response.data);    
+}
+});
+// End of ajax
+}
+// End of countCartProducts function
+
 
 //Start to delete a product from cart by ajax
 
@@ -234,6 +264,7 @@ button: "OK",
 $('#cartBody').empty();
 // To fetch data after delete product from cart
 searchRecord();
+countCartProducts();
 },
 // If their is any error
 error:function(jqXHR, exception)

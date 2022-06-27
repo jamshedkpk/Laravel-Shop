@@ -23,6 +23,8 @@ Route::post('/cart/store',[CartController::class,'addProductToCart'])->name('car
 Route::delete('/cart/delete/{id}',[CartController::class,'destroy'])->name('cart-delete');
 // Get all products in the cart of a specific user by ajax call
 Route::get('/cart/products',[CartController::class,'searchCartRecord'])->name('cart-product');
+// Count products in the cart of a specific user by ajax call
+Route::get('/cart/count',[CartController::class,'countCartProduct'])->name('cart-count');
 
 Auth::routes();
 

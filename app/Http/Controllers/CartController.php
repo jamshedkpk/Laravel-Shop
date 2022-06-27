@@ -65,7 +65,7 @@ static function countCartProduct()
 //To count product of cart items for this user
 $userid=Auth::id();
 $count=Cart::where(['user_id'=>$userid])->count();    
-return $count;
+return response()->json(['data'=>$count]);
 }
 
 public function destroy($id)

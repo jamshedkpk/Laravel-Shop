@@ -86,9 +86,46 @@ Sign Out
 @endguest
 <li class="nav-item">
 <a class="nav-link active" aria-current="page" href="{{route('cart-index')}}">
-<strong>
+<strong class="text-light">
 <i class='fa fa-shopping-cart'></i>
-&nbsp;Cart : {{ $items ? $items : '0' }}
+Items : 
+&nbsp;
+<span id="cartProducts">
+</span>
+</strong>
+<script>
+$(document).ready(function(){
+countCartProducts();
+// Start of searchProduct function
+function countCartProducts()
+{
+// store csrf token in token variable
+var token = $("meta[name='csrf-token']").attr("content");
+// Start of ajax
+$.ajax
+({
+// Url where you want to send data
+url: "/cart/count",
+// Method of sending data
+type: 'GET',
+// Format of data
+dataType:'json',
+// To clear cache
+cache:false,
+// Data which you want to send
+data: {
+"_token": token,
+},
+success:function(response)
+{
+$('#cartProducts').html(response.data);    
+}
+});
+// End of ajax
+}
+// End of searchProduct function
+});
+</script>
 </strong>
 </a>
 </li>
