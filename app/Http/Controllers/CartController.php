@@ -96,6 +96,14 @@ else
 {
 return redirect()->route('login');
 }
-
+}
+public function update(Request $request, $id)
+{
+$id=$id;
+$quantity=$request->input('quantity');
+$userid=Auth::id();
+$cart=Cart::where(['user_id'=>$userid,'product_id'=>$id]);
+$cart->update(['quantity'=>$quantity]);
+return response()->json(['cart-product-deleted'=>'Cart quantity is successfully Updated!']);
 }
 }

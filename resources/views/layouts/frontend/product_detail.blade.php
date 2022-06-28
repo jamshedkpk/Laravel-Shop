@@ -55,14 +55,20 @@ label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;c
                             <p class="about">
                             {{ $product->description }}    
                             </p>
+                            <form action="{{route('cart-store')}}" method="post">
+                            @csrf
                             <div class="text-center">
+                            <input type="hidden" name="id" value="{{$product->id}}"/>
                             <button class="btn btn-success text-uppercase mr-2 px-4"> <i class="fa fa-shopping-cart"></i> 
                             &nbsp;
                             Add To Cart</button>
+                        
                             <a href="{{route('homepage')}}" class="btn btn-danger text-uppercase mr-2 px-4"> <i class="fa fa-home"></i>
                             &nbsp;
                             Home Page</a>
                             </div>
+                            </form>
+
                         </div>
                     </div>
                     @endif

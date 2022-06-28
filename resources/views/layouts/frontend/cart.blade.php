@@ -43,10 +43,10 @@ Proceed to Pay</button>
 
 @section('extra-js')
 <script>
-
-//Start of search cart data throught ajax
+// Start of jquery
 $(document).ready(function(){
 searchRecord();
+//Start of search cart data throught ajax
 function searchRecord()
 {
 // store csrf token in token variable
@@ -104,35 +104,27 @@ name
 +
 '</div>'
 +
-'<div class="col-md-2 mt-3">'
+'<div class="col-md-2 text-center">'
 +
-'<div type="text" class="input-group text-center mb-3" style="width:130px;">'
-+
-'<button class="input-group-text decrement-btn">-</button>'
-+
-'<input type="text" name="quantity" class="form-control text-center quantity-input" value="1">'
-+
-'<button class="input-group-text increment-btn">+</button>'
-+
-'</div>'
+'<input type="number" class="form-control form-control-sm qty" style="height:37px;" pid="' +id+ '" id="qty-'+id+'" min="1" max="20"/>'
 +
 '</div>'
 +
 '<div class="col-md-2 text-center">'
 +
-price
+'<input type="text" value="'+price+'" pid="'+id+'" id="price-'+id+'" class="form-control price" />'
 +
 '</div>'
 +
 '<div class="col-md-2 text-center">'
 +
-price
+'<input type="text" pid="'+id+'" id="total-'+id+'" class="form-control total"/>'
 +
 '</div>'
 +
-'<div class="col-md-1 class="text-center">'
+'<div class="col-md-1 text-center">'
 +
-'<a href="#" class="text-warning">'
+'<a href="#" product_id="' + id + '" class="text-warning updateCartBtn" id="updatebtn">'
 +
 '<span class="fa fa-edit">'
 +
@@ -192,6 +184,32 @@ $('#cartBody').html(
 });
 }
 //End of search cart data throught ajax
+
+
+// Start to increase and decrease quantity of cart
+// When use press any key then total price is the following
+$("body").delegate(".qty","keypress",function(){
+// Get product id throught attribute property
+var pid=$(this).attr('pid');
+// Get product quantity by defining a unique name by mixing id and pid
+var quantity=$("#qty-"+pid).val();
+// Get product price by defining a unique name by mixing id and pid
+var price=$("#price-"+pid).val();
+// Calculate total price of each product 
+var total=(quantity*price);
+$("#total-"+pid).val(total);
+});
+
+// When use mouse out then total price is the following
+$("body").delegate(".qty","mouseout",function(){
+var pid=$(this).attr('pid');
+var quantity=$("#qty-"+pid).val();
+var price=$("#price-"+pid).val();
+var total=(quantity*price);
+$("#total-"+pid).val(total);
+});
+
+// End to increase and decrease quantity of cart
 
 countCartProducts();
 // Start of CountCartProducts function
@@ -299,7 +317,88 @@ button: "OK",
 });
 // End of ajax operation to delete a product from cart
 });
-});
 // End to delete a product from cart by ajax
+
+// Start of update cart product through ajax
+$('body').delegate('.updateCartBtn','click',function(){
+event.preventDefault();
+var pid=$(this).attr('product_id');
+var quantity=$("#qty-"+pid).val();
+updateCartProduct(pid,quantity);
+function updateCartProduct(pid,quantity)
+{
+// store csrf token in token variable
+var token = $("meta[name='csrf-token']").attr("content");
+$.ajax
+({
+// Url where you want to send data
+url: "/cart/update/"+pid,
+// Method of sending data
+type: 'PUT',
+// Format of data
+dataType:'json',
+// To clear cache
+cache:false,
+// Data which you want to send
+data: {
+"id": pid,
+"_token": token,
+"quantity":quantity,
+},
+// Response of data
+success: function (response){
+// Display success message of updated record
+swal({
+title: "Updated Successfully!",
+text: response['cart-product-updated'],
+icon: "success",
+timer:2000,  
+button: "OK",
+});
+// To make cartBody empty before fetching new data
+$('#cartBody').empty();
+// To fetch data after delete product from cart
+searchRecord();
+countCartProducts();
+},
+// Start of error message
+error:function(jqXHR, exception)
+{
+var msg = '';
+if (jqXHR.status === 0) {
+msg = 'Not connect.\n Verify Network.';
+} else if (jqXHR.status == 404) {
+msg = 'Requested page not found. [404]';
+} else if (jqXHR.status == 500) {
+msg = 'Internal Server Error [500].';
+} else if (exception === 'parsererror') {
+msg = 'Requested JSON parse failed.';
+} else if (exception === 'timeout') {
+msg = 'Time out error.';
+} else if (exception === 'abort') {
+msg = 'Ajax request aborted.';
+} else {
+msg = 'Unknown error has occured!';
+}
+// Display error message by swal
+swal({
+title: "Error Occured !",
+text: msg,
+icon: "error",
+timer:2000,  
+button: "OK",
+});
+// End of swal
+}
+// End of error message
+
+});
+}
+//updateproduct(pid,quantity,price,total);
+});
+// End of update cart product through ajax
+
+});
+// End of jquery
 </script>
 @endsection

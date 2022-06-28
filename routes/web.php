@@ -25,6 +25,8 @@ Route::delete('/cart/delete/{id}',[CartController::class,'destroy'])->name('cart
 Route::get('/cart/products',[CartController::class,'searchCartRecord'])->name('cart-product');
 // Count products in the cart of a specific user by ajax call
 Route::get('/cart/count',[CartController::class,'countCartProduct'])->name('cart-count');
+// Update cart products in the cart of a specific user by ajax call
+Route::put('/cart/update/{id},{quantity}',[CartController::class,'update'])->name('cart-update');
 
 Auth::routes();
 
