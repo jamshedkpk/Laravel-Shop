@@ -34,7 +34,7 @@ public function addProductToCart(Request $request)
 // If user is not login then redirect to login
 if(!Auth::id())
 {
-return redirect()->route('login');
+return response()->json(['status'=>201]);
 }
 else
 {
@@ -44,7 +44,7 @@ $productid=$request->id;
 $count=Cart::where(['user_id'=>$userid,'product_id'=>$productid])->count();
 if($count>0)
 {
-return redirect()->route('homepage')->with(['product-exist'=>'Product is already added']);
+    return response()->json(['status'=>202,'product-exist'=>'Product is already Exist!']);
 }
 else
 {
@@ -55,7 +55,7 @@ $obj->product_id=$productid;
 $save=$obj->save();
 if($save)
 {
-return redirect()->route('homepage')->with(['product-added-to-cart'=>'Product is successfully added to Cart']);
+return response()->json(['status'=>200,'product-added-to-card'=>'Product is successfully Added!']);
 }    
 }
 }    
@@ -104,6 +104,6 @@ $quantity=$request->input('quantity');
 $userid=Auth::id();
 $cart=Cart::where(['user_id'=>$userid,'product_id'=>$id]);
 $cart->update(['quantity'=>$quantity]);
-return response()->json(['cart-product-deleted'=>'Cart quantity is successfully Updated!']);
+return response()->json(['cart-product-updated'=>'Cart quantity is successfully Updated!']);
 }
 }

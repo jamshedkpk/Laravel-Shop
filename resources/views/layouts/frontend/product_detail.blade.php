@@ -55,11 +55,8 @@ label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;c
                             <p class="about">
                             {{ $product->description }}    
                             </p>
-                            <form action="{{route('cart-store')}}" method="post">
-                            @csrf
                             <div class="text-center">
-                            <input type="hidden" name="id" value="{{$product->id}}"/>
-                            <button class="btn btn-success text-uppercase mr-2 px-4"> <i class="fa fa-shopping-cart"></i> 
+                            <button type="button" class="btn btn-success text-uppercase btnAddProduct mr-2 px-4" product_id="{{$product->id}}"> <i class="fa fa-shopping-cart"></i> 
                             &nbsp;
                             Add To Cart</button>
                         
@@ -67,8 +64,6 @@ label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;c
                             &nbsp;
                             Home Page</a>
                             </div>
-                            </form>
-
                         </div>
                     </div>
                     @endif
@@ -77,4 +72,129 @@ label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;c
         </div>
     </div>
 </div>
+@endsection
+@section('extra-js')
+
+<script>
+$(document).ready(function(){
+// When we click btnAddProduct
+$('body').delegate('.btnAddProduct','click',function(){
+// Stop the default behaviour of the button
+event.preventDefault();
+// Take product id by attribute property in jquery
+var pid=$(this).attr('product_id');
+// store csrf token in token variable
+var token = $("meta[name='csrf-token']").attr("content");
+$.ajax
+({
+// Url where you want to send data
+url: "/cart/store/",
+// Method of sending data
+type: 'POST',
+// Format of data
+dataType:'json',
+// To clear cache
+cache:false,
+// Data which you want to send
+data: 
+{
+"id":pid,
+"_token": token,
+},
+// Response of data If success
+success: function (response)
+{
+// If user is not login
+if(response['status']==201)
+{
+window.location.href = '/login'; 
+}
+// If product is already exist
+else if(response['status']==202)
+{
+swal({
+title: "Error Occured!",
+text: response['product-exist'],
+icon: "error",
+timer:2000,  
+button: "OK",
+});
+}
+// If product added successfully
+else if(response['status']==200)
+swal({
+title: "Added Successfully!",
+text: response['product-added-to-cart'],
+icon: "success",
+timer:2000,  
+button: "OK",
+});
+countCartProducts();
+},
+// End of response of data If success
+// If their is any error
+error:function(jqXHR, exception)
+{
+var msg = '';
+if (jqXHR.status === 0) {
+msg = 'Not connect.\n Verify Network.';
+} else if (jqXHR.status == 404) {
+msg = 'Requested page not found. [404]';
+} else if (jqXHR.status == 500) {
+msg = 'Internal Server Error [500].';
+} else if (exception === 'parsererror') {
+msg = 'Requested JSON parse failed.';
+} else if (exception === 'timeout') {
+msg = 'Time out error.';
+} else if (exception === 'abort') {
+msg = 'Ajax request aborted.';
+} else {
+msg = 'Unknown error has occured!';
+}
+// Display error message by swal
+swal({
+title: "Error Occured !",
+text: msg,
+icon: "error",
+timer:2000,  
+button: "OK",
+});
+// End of swal
+}
+// End of error message
+
+});
+});
+});
+// Start of CountCartProducts function
+function countCartProducts()
+{
+// store csrf token in token variable
+var token = $("meta[name='csrf-token']").attr("content");
+// Start of ajax
+$.ajax
+({
+// Url where you want to send data
+url: "/cart/count",
+// Method of sending data
+type: 'GET',
+// Format of data
+dataType:'json',
+// To clear cache
+cache:false,
+// Data which you want to send
+data: {
+"_token": token,
+},
+success:function(response)
+{
+$('#cartProducts').html(response.data);    
+}
+});
+// End of ajax
+}
+// End of countCartProducts function
+
+</script>
+
 @endsection
