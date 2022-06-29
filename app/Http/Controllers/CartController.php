@@ -11,7 +11,7 @@ class CartController extends Controller
 public function index()
 {
 // To check user is login or not
-if(Auth::id())
+if(Auth::check())
 {
 // Get user id 
 $userid=Auth::id();
@@ -32,7 +32,7 @@ return redirect()->route('login');
 public function addProductToCart(Request $request)
 {
 // If user is not login then redirect to login
-if(!Auth::id())
+if(!Auth::check())
 {
 return response()->json(['status'=>201]);
 }
@@ -44,7 +44,7 @@ $productid=$request->id;
 $count=Cart::where(['user_id'=>$userid,'product_id'=>$productid])->count();
 if($count>0)
 {
-    return response()->json(['status'=>202,'product-exist'=>'Product is already Exist!']);
+return response()->json(['status'=>202,'product-exist'=>'Product is already Exist!']);
 }
 else
 {
@@ -55,7 +55,7 @@ $obj->product_id=$productid;
 $save=$obj->save();
 if($save)
 {
-return response()->json(['status'=>200,'product-added-to-card'=>'Product is successfully Added!']);
+return response()->json(['status'=>200,'product-added-to-cart'=>'Product is successfully Added!']);
 }    
 }
 }    
@@ -81,7 +81,7 @@ return response()->json(['cart-product-deleted'=>'Cart Product is successfully D
 public function searchCartRecord()
 {
 // To check user is login or not
-if(Auth::id())
+if(Auth::check())
 {
 // Get user id 
 $userid=Auth::id();
