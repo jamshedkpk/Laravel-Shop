@@ -11,7 +11,9 @@ return
 [
 'user_id'=>$this->faker->numberBetween(1,5),
 'product_id'=>$this->faker->numberBetween(1,5),
-'quantity'=>1,
+'quantity'=>0,
+'price'=>0,
+'total'=>0
 ];
 }
 }

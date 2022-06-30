@@ -31,6 +31,7 @@ return redirect()->route('login');
 // Add product to cart
 public function addProductToCart(Request $request)
 {
+$productid=$request->id;
 // If user is not login then redirect to login
 if(!Auth::check())
 {
@@ -40,7 +41,6 @@ else
 {
 // To check the product if it is already in cart
 $userid=Auth::id();
-$productid=$request->id;
 $count=Cart::where(['user_id'=>$userid,'product_id'=>$productid])->count();
 if($count>0)
 {
@@ -49,9 +49,13 @@ return response()->json(['status'=>202,'product-exist'=>'Product is already Exis
 else
 {
 // To add product to cart
+$price=Product::where(['id'=>$productid])->pluck('selling_price')->first();
 $obj=new Cart();
 $obj->user_id=$userid;
 $obj->product_id=$productid;
+$obj->quantity=1;
+$obj->price=$price;
+$obj->total=($price);
 $save=$obj->save();
 if($save)
 {
@@ -97,13 +101,24 @@ else
 return redirect()->route('login');
 }
 }
+
 public function update(Request $request, $id)
 {
-$id=$id;
-$quantity=$request->input('quantity');
+$productid=$id;
 $userid=Auth::id();
-$cart=Cart::where(['user_id'=>$userid,'product_id'=>$id]);
-$cart->update(['quantity'=>$quantity]);
+$quantity=$request->input('quantity');
+$price=Product::find($productid)->pluck('selling_price')->first();
+$total=($quantity*$price);
+$cart=Cart::where(['user_id'=>$userid,'product_id'=>$productid]);
+$cart->update(['quantity'=>$quantity,'price'=>$price,'total'=>$total]);
 return response()->json(['cart-product-updated'=>'Cart quantity is successfully Updated!']);
+}
+
+// Calculate cart total price
+public function cartTotalPrice()
+{
+$userid=Auth::id();
+$total=Cart::where(['user_id'=>$userid])->sum('total');
+return response()->json(['cart-total-price'=>$total]);
 }
 }

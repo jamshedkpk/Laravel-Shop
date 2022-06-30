@@ -11,10 +11,10 @@ Schema::create('products', function (Blueprint $table) {
 $table->id();
 $table->string('name');
 $table->string('slug');
-$table->string('original_price');
-$table->string('selling_price');
+$table->float('original_price');
+$table->float('selling_price');
 $table->text('description');
-$table->string('quantity');
+$table->float('quantity');
 $table->foreignId('catagory_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
 $table->tinyInteger('status');
 $table->text('photo');

@@ -26,7 +26,9 @@ Route::get('/cart/products',[CartController::class,'searchCartRecord'])->name('c
 // Count products in the cart of a specific user by ajax call
 Route::get('/cart/count',[CartController::class,'countCartProduct'])->name('cart-count');
 // Update cart products in the cart of a specific user by ajax call
-Route::put('/cart/update/{id},{quantity}',[CartController::class,'update'])->name('cart-update');
+Route::put('/cart/update/{id}',[CartController::class,'update'])->name('cart-update');
+// Count cart total price 
+Route::get('/cart/price',[CartController::class,'cartTotalPrice'])->name('cart-total-price');
 
 Auth::routes();
 

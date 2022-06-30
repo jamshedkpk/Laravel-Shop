@@ -7,10 +7,21 @@ padding:5px;
 }
 </style>
 
-<div class="container mt-10">
-<h3 class="text-center">Welcome To The Cart Section</h3>
+<div class="container" style="margin-top:10px;">
+<h3 class="text-center text-primary">Welcome To The Cart Section</h3>
 <hr>
 <div id="cartBody">
+
+</div>
+
+<div class="row">
+<div class="col-md-8 offset-2">
+<h3 class="text-end text-primary">Total Price : 
+<span id="cart-price">
+
+</span>  
+PKR</h3>
+</div>
 </div>
 
 <div class="row">
@@ -46,6 +57,14 @@ Proceed to Pay</button>
 // Start of jquery
 $(document).ready(function(){
 searchRecord();
+/* To search a record by ajax we can simply use window.location.reload()
+function instead of the following complex code. 
+But if you want to not refresh the page than you can write the code below.
+In this wany we create a div where we want to display the code and then
+attatch the code by prepend function of jquery. But recommended way is to 
+use function of window.location.reload();
+*/
+
 //Start of search cart data throught ajax
 function searchRecord()
 {
@@ -83,7 +102,7 @@ var name=response['products'][i]['name'];
 var photo='storage/productPhoto/'+response['products'][i]['photo'];;
 var price=response['products'][i]['selling_price'];
 // To attach all fetched data with cartBody id
-$('#cartBody').append(
+$('#cartBody').prepend(
 '<div class="row">'
 +
 '<div class="col-md-8 offset-2">'
@@ -235,6 +254,7 @@ data: {
 success:function(response)
 {
 $('#cartProducts').html(response.data);    
+cartTotalPrice();
 }
 });
 // End of ajax
@@ -283,6 +303,8 @@ $('#cartBody').empty();
 // To fetch data after delete product from cart
 searchRecord();
 countCartProducts();
+cartTotalPrice();
+
 },
 // If their is any error
 error:function(jqXHR, exception)
@@ -322,6 +344,7 @@ button: "OK",
 // Start of update cart product through ajax
 $('body').delegate('.updateCartBtn','click',function(){
 event.preventDefault();
+
 var pid=$(this).attr('product_id');
 var quantity=$("#qty-"+pid).val();
 updateCartProduct(pid,quantity);
@@ -360,6 +383,7 @@ $('#cartBody').empty();
 // To fetch data after delete product from cart
 searchRecord();
 countCartProducts();
+cartTotalPrice();
 },
 // Start of error message
 error:function(jqXHR, exception)
@@ -397,6 +421,39 @@ button: "OK",
 //updateproduct(pid,quantity,price,total);
 });
 // End of update cart product through ajax
+
+// Start of calculate cart total price
+cartTotalPrice();
+// Start of cartTotalPrice function
+function cartTotalPrice()
+{
+// store csrf token in token variable
+var token = $("meta[name='csrf-token']").attr("content");
+
+// Start of ajax
+$.ajax({
+// Url where you want to send data
+url: "/cart/price",
+// Method of sending data
+type: 'GET',
+// Format of data
+dataType:'json',
+// To clear cache
+cache:false,
+// Data which you want to send
+data: {
+"_token": token,
+},
+success:function(response)
+{
+$total=response['cart-total-price'];
+$('#cart-price').html($total);
+}
+// End of ajax
+});
+}
+// End of cartTotalPrice function
+// End of calculate cart total price
 
 });
 // End of jquery

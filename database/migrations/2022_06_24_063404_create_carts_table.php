@@ -11,7 +11,9 @@ Schema::create('carts', function (Blueprint $table) {
 $table->id();
 $table->foreignId('user_id')->onDelete('cascade')->onUpdate('cascade');
 $table->foreignId('product_id')->onDelete('cascade')->onUpdate('cascade');
-$table->string('quantity')->default(1);
+$table->float('quantity')->default(0);
+$table->float('price')->default(0);
+$table->float('total')->default(0);
 $table->timestamps();
 });
 }

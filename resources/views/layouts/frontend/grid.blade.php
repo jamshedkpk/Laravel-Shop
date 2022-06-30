@@ -165,7 +165,7 @@ background-color:green;
             <div class="price text-center text-success">Price : {{$product->selling_price}}</div>
             <div class="price text-center text-danger">
             <s>
-            Price : {{$product->selling_price}}
+            Price : {{$product->original_price}}
             </s>    
             </div>
             <button type="button" class="btn btn-primary w-100 btnAddProduct" product_id="{{ $product->id }}">Add To Cart</button>
