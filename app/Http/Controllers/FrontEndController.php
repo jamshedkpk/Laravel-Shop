@@ -10,15 +10,15 @@ public function index()
 {
 // Show all catagories and products which are available in random order and paginate
 $products=Product::where(['status'=>1])->inRandomOrder()->paginate(8);
-$catagories=Catagory::where(['status'=>1])->inRandomOrder()->limit(10)->get();
+$catagories=Catagory::where(['status'=>1])->limit(10)->get();
 // Sending catagories and products to the main page of user
 return view('layouts.frontend.product')->with(['products'=>$products,'catagories'=>$catagories]);
 }
 
 public function searchCatagoryProduct($id)
 {
-$catagories=Catagory::where(['status'=>1])->get();
-$products=Product::where(['catagory_id'=>$id,'status'=>1])->inRandomOrder()->paginate(8);;
+$catagories=Catagory::where(['status'=>1])->limit(10)->get();
+$products=Product::where(['catagory_id'=>$id,'status'=>1])->inRandomOrder()->paginate(8);
 return view('layouts.frontend.catagory')->with(['catagories'=>$catagories,'products'=>$products]);    
 }
 

@@ -131,19 +131,18 @@ background-color:green;
 <h3 class="text-center text-primary">Latest Products</h3>
 <hr>
 <div class="row">
-<div class="col-md-2">
-<ul class="navbar-nav">
-<li class="nav-item" style="margin-left:20px;">
-<h4 class="text-center text-primary">Catagories</h4>
-</li>
-<li class="dropdown-divider"></li>
+<div class="col-md-2 mt-3">
+<ul class="list-group">
+<li class="list-group-item text-center text-primary"><strong>Catagories</strong></li>
 @foreach($catagories as $catagory)
-<li class="nav-item" style="margin-left:20px;">
-<a href="{{route('catagory-product',$catagory->id)}}" class="nav-link active">{{ $catagory->name }}</a>
+<li class="list-group-item ">
+<a href="{{route('catagory-product',$catagory->id)}}" class="list-group-item  {{ Request::is('catagory/products/'.$catagory->id) ? 'active' : '' }}">
+{{ $catagory->name }}    
+</a>
 </li>
-<li class="dropdown-divider"></li>
 @endforeach
 </ul>
+
 </div>
 <div class="col-md-10">
 @if(!$products->isEmpty())

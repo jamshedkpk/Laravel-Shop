@@ -14,9 +14,11 @@
 <img src="{{asset('storage/productPhoto/'.$product->photo)}}" class="img-thumbnail" alt="">
 </div>
 <div class="card-body">
-<h5 class="text-center text-danger">{{substr($product->name,0,14) }}</h5>
-<span class="float-start">RS : {{$product->selling_price}}</span>
-<span class="float-end"><s>RS : {{$product->original_price}}</s></span>
+<h5 class="text-center text-primary">{{substr($product->name,0,14) }}</h5>
+<strong class="float-start text-success">
+RS : {{$product->selling_price}}
+</strong>  
+<strong class="float-end text-danger"><s>RS : {{$product->original_price}}</s></strong>
 </div>
 </div>
 @endforeach
@@ -39,7 +41,9 @@
 </div>
 <div class="card-body">
   <!-- Length of catagory not exceeds than 14-->
-<h5 class="text-center text-danger">{{substr ($catagory->name,0,14)}}</h5>
+<h5 class="text-center text-primary">
+  
+{{substr ($catagory->name,0,14)}}</h5>
 </div>
 </div>
 @endforeach
