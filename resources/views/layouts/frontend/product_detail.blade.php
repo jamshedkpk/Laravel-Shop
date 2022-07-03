@@ -34,7 +34,12 @@ label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;c
                     <div class="col-md-8">
                         <div class="product">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
+                                <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div>
+                                @if($product->quantity>0)
+                                 <i class="fa fa-shopping-cart text-success"></i>
+                                 @else
+                                 <i class="fa fa-shopping-cart text-danger"></i>
+                                 @endif                                 
                             </div>
                             <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Orianz</span>
                                 <h3 class="text-uppercase">
@@ -56,10 +61,14 @@ label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;c
                             {{ $product->description }}    
                             </p>
                             <div class="text-center">
+                            @if($product->quantity>0)
                             <button type="button" class="btn btn-success text-uppercase btnAddProduct mr-2 px-4" product_id="{{$product->id}}"> <i class="fa fa-shopping-cart"></i> 
                             &nbsp;
-                            Add To Cart</button>
-                        
+                            Add To Cart
+                            </button>
+                            @else
+                            <h4 class="text-danger text-center">Sorry The Product Is Out Of Stock</h4>
+                            @endif
                             <a href="{{route('homepage')}}" class="btn btn-danger text-uppercase mr-2 px-4"> <i class="fa fa-home"></i>
                             &nbsp;
                             Home Page</a>

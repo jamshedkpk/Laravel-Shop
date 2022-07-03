@@ -36,12 +36,11 @@ PKR</h3>
 Homepage</a>
 </div>
 <div class="col-md-6">
-<button type="button" class="btn btn-warning btn-block btn-lg w-100">
+<a href="{{route('order-index')}}" class="btn btn-warning btn-block btn-lg w-100">
 <i class="fa fa-shopping-cart"></i>
 &nbsp;    
-Proceed to Pay</button>
+Proceed to Pay</a>
 </div>
-
 </div>
 </div>
 </div>

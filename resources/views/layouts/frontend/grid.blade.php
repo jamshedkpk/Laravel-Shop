@@ -257,6 +257,17 @@ timer:2000,
 button: "OK",
 });
 }
+// If product is out of stock
+else if(response['status']==203)
+{
+swal({
+title: "Error Occured!",
+text: response['product-not-available'],
+icon: "error",
+timer:2000,  
+button: "OK",
+});
+}
 // If product added successfully
 else if(response['status']==200)
 swal({
