@@ -7,6 +7,7 @@ text-align:center;
 }
 </style>
 <div class="container " style="margin-top:10px;">
+<form action="{{route('place-order')}}">
 <div class="row">
 <div class="col-md-6">
 <div class="card">
@@ -18,13 +19,23 @@ text-align:center;
 <div class="col-md-6">
 <div class="form-group">
 <label for="name">Name :</label>
-<input type="text" value="{{ $user->name }}" name="name" id="name" class="form-control"/>
+<input type="text" value="{{ $user->username }}" name="name" id="name" class="form-control"/>
+@error('name')
+<strong class="text-danger">
+{{ $message }}
+</strong>
+@enderror
 </div>
 </div>
 <div class="col-md-6">
 <div class="form-group">
 <label for="email">Email :</label>
-<input type="text" name="email" value="{{ $user->email }}" id="email" class="form-control"/>
+<input type="text" name="email" value="{{ $user->useremail }}" id="email" class="form-control"/>
+@error('email')
+<strong class="text-danger">
+{{ $message }}
+</strong>
+@enderror
 </div>
 </div>
 </div>
@@ -37,18 +48,28 @@ text-align:center;
 <label for="country">Country :</label>
 <select name="country" id="country" class="form-control">
 <option value="0">Select A Country</option>
-<option value="pakistan">Pakistan</option>
-<option value="india">India</option>
-<option value="japan">Japan</option>
-<option value="turkey">Turkey</option>
-<option value="usa">USA</option>
+@foreach($countries as $country)
+<option value="{{ $country->name }}">
+ {{ $country->name }}   
+</option>
+@endforeach
 </select>
+@error('country')
+<strong class="text-danger">
+{{ $message }}
+</strong>
+@enderror
 </div>
 </div>
 <div class="col-md-6">
 <div class="form-group">
 <label for="state">State :</label>
-<input type="text" id="state" name="state" class="form-control"/>
+<input type="text" id="state" name="state" value="{{ $user->userstate }}" class="form-control"/>
+@error('state')
+<strong class="text-danger">
+{{ $message }}
+</strong>
+@enderror
 </div>
 </div>
 </div>
@@ -56,21 +77,38 @@ text-align:center;
 <div class="col-md-6">
 <div class="form-group">
 <label for="city">City :</label>
-<input type="text" name="city" id="city" class="form-control"/>
+<input type="text" name="city" id="city" value="{{ $user->usercity }}" class="form-control" />
+@error('city')
+<strong class="text-danger">
+{{ $message }}
+</strong>
+@enderror
 </div>
 </div>
 <div class="col-md-6">
 <div class="form-group">
 <label for="mobile">Mobile :</label>
-<input type="text" name="mobile" id="mobile" class="form-control"/>
+<input type="text" name="mobile" id="mobile" value="{{ $user->usermobile }}" class="form-control"/>
+@error('mobile')
+<strong class="text-danger">
+{{ $message }}
+</strong>
+@enderror
 </div>
 </div>
 </div>
 <div class="row">
 <div class="col-md-12">
 <div class="form-group">
-<label for="address">Name :</label>
-<textarea class="form-control" name="address" id="address"  cols="30" rows="10"></textarea>
+<label for="address">Address :</label>
+<textarea class="form-control" name="address" id="address"  cols="30" rows="10">
+{{ $user->useraddress }}
+</textarea>
+@error('address')
+<strong class="text-danger">
+{{ $message }}
+</strong>
+@enderror
 </div>
 </div>
 </div>
@@ -101,8 +139,8 @@ Price
 </tr>
 </thead>
 <tbody>
-@if(!$orders->isEmpty())
-@foreach($orders as $index=>$item)
+@if(!$cartItems->isEmpty())
+@foreach($cartItems as $index=>$item)
 <tr>
 <td>
 {{ $index+1 }}    
@@ -126,15 +164,15 @@ Price
 <div class="img-thumbnail text-center">
 <img class="img-responsive" src="{{asset('template_admin/assets/images/empty.png')}}" alt="" height="300px" width="400px;">
 </div>
-
 @endif
 </tbody>
 </table>
-<h4 class="text-success text-end">Total Price : {{ $total ? $total : '0' }}</h4>
-
+<h4 class="text-success text-end">Total Price : {{ $totalPrice }}</h4>
+<button class="btn btn-success w-100">Place Order</button>
 </div>
 </div>
 </div>
 </div>
+</form>
 </div>
 @endsection

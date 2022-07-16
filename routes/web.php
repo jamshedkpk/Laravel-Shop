@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\CatagoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CheckoutController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -30,8 +30,11 @@ Route::get('/cart/count',[CartController::class,'countCartProduct'])->name('cart
 Route::put('/cart/update/{id}',[CartController::class,'update'])->name('cart-update');
 // Count cart total price 
 Route::get('/cart/price',[CartController::class,'cartTotalPrice'])->name('cart-total-price');
-// Call to order of user
-Route::get('/order',[OrderController::class,'index'])->name('order-index');
+// Call to checkout controller
+Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout-index');
+// Place user order 
+Route::get('/place/order',[CheckoutController::class,'placeOrder'])->name('place-order');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

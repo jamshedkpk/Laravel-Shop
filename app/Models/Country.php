@@ -5,15 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Country extends Model
 {
     use HasFactory;
-    protected $fillable=
-    [
-    'user_id',
-    'token',
-    'date',
-    'status',
-    'type'
-    ];
+    protected $fillable=['name'];
 }

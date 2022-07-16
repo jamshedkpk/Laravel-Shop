@@ -9,7 +9,11 @@ public function up()
 {
 Schema::create('orders', function (Blueprint $table) {
 $table->id();
-$table->string('cart_id');
+$table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+$table->string('token');
+$table->string('date');
+$table->tinyInteger('status')->default(0);
+$table->string('type');
 $table->timestamps();
 });
 }

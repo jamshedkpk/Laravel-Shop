@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Catagory;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Country;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,6 @@ $this->call(UserSeeder::class);
 $this->call(RoleSeeder::class);
 $this->call(CatagorySeeder::class);
 Product::factory()->count(5)->create();
+Country::factory(10)->create();
 }
 }

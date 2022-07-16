@@ -5,15 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class OderItem extends Model
 {
     use HasFactory;
-    protected $fillable=
-    [
-    'user_id',
-    'token',
-    'date',
-    'status',
-    'type'
-    ];
 }
