@@ -98,7 +98,7 @@ for(i=0; i<count; i++)
 // Store attributes in different variable
 var id=response['products'][i]['id'];
 var name=response['products'][i]['name'];
-var photo='storage/productPhoto/'+response['products'][i]['photo'];;
+var photo=response['products'][i]['photo'];;
 var price=response['products'][i]['selling_price'];
 // To attach all fetched data with cartBody id
 $('#cartBody').prepend(

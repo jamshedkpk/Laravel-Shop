@@ -53,7 +53,7 @@ Delete
 {{ $catagory->name }}
 </td>
 <td>
-<img id="catagoryPhoto" src="{{ asset('storage/catagoryPhoto/'.$catagory->photo)}}" alt="Not available" class="img-responsive">
+<img id="catagoryPhoto" src="{{ asset($catagory->photo)}}" alt="Not available" class="img-responsive">
 </td>
 <td>
 <a href="{{route('catagory-edit',$catagory->id)}}">

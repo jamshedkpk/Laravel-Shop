@@ -52,7 +52,7 @@ $fileResize=Image::make($photo->getRealPath());
 $fileResize->resize(300,300);
 $fileResize->save('storage/catagoryPhoto/'.$filename);
 // Store in data base
-$data['photo']=$filename;
+$data['photo']='storage/catagoryPhoto/'.$filename;
 $save=Catagory::create($data);
 if($save)
 {
@@ -84,13 +84,13 @@ $this->validate($request,[
 'photo'=>'image'
 ]);
 
-// Find the catagory
+// Find the catagory which we want to update
 $catagory=Catagory::find($id);
 
 if($request->hasFile('photo'))
 {
 // To delete previous image from storage folder
-$path="storage/catagoryPhoto/".$catagory->photo;
+$path=$catagory->photo;
 if(File::exists($path))
 {
 File::delete($path);
@@ -121,7 +121,7 @@ $update=$catagory->update
 'meta_description'=>$request->meta_description,
 'status'=>$request->status,
 'popular'=>$request->popular,
-'photo'=>$filename
+'photo'=>'storage/catagoryPhoto/'.$filename
 ]);
 
 if($update)
@@ -155,7 +155,7 @@ public function destroy($id)
 {
 $catagory=Catagory::find($id);
 // To delete image from storage folder
-$path="storage/catagoryPhoto/".$catagory->photo;
+$path=$catagory->photo;
 if(File::exists($path))
 {
 File::delete($path);

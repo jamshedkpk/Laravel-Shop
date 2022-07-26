@@ -8,7 +8,7 @@ class ProductFactory extends Factory
 public function definition()
 {
 $originalPrice=$this->faker->numberBetween(5000,10000);
-$name=$this->faker->name();
+$name=$this->faker->text(15);
 return 
 [
 'catagory_id'=>$this->faker->numberBetween(1,5),

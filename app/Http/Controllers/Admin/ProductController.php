@@ -57,7 +57,7 @@ $photo=$request->file('photo');
 $fileRezise=Image::make($photo->getRealPath());
 $fileRezise->resize(300,300);
 $fileRezise->save(public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'productPhoto'.DIRECTORY_SEPARATOR.$fileName));
-$data['photo']=$fileName;
+$data['photo']='storage/productPhoto/'.$fileName;
 }
 $save=Product::create($data);
 if($save)
@@ -93,7 +93,7 @@ $product=Product::find($id);
 if($request->hasFile('photo'))
 {
 // First delete product image from storage folder
-$path='storage/productPhoto/'.$product->photo;
+$path=$product->photo;
 if(File::exists($path))
 {
 File::delete($path);
@@ -123,7 +123,7 @@ $update=$product->update
 'slug'=>$request->slug,
 'catagory_id'=>$request->catagory_id,
 'status'=>$request->status,
-'photo'=>$fileName,
+'photo'=>'storage/productPhoto/'.$fileName,
 ]);
 if($update)
 {
@@ -156,7 +156,7 @@ public function destroy($id)
 // Find the product which is to be deleted
 $product=Product::find($id);
 // First delete product image from storage folder
-$path='storage/productPhoto/'.$product->photo;
+$path=$product->photo;
 if(File::exists($path))
 {
 File::delete($path);

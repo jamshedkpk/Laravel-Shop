@@ -14,13 +14,20 @@ User::create([
 'name'=>'admin',
 'email'=>'admin@gmail.com',
 'role_id'=>1,
-'password'=>Hash::make('admin')
+'password'=>Hash::make('admin'),
+'country_id'=>1,
+'city_id'=>2,
+'state_id'=>3,
+'address'=>'Village Council Tari Khel',
+'mobile'=>3469040552,
+'photo'=>'Photo is here',
+'status'=>1
 ]);
 User::create([
 'name'=>'user',
 'email'=>'user@gmail.com',
 'role_id'=>2,
-'password'=>Hash::make('admin')
+'password'=>Hash::make('admin'),
 ]);
 }
 

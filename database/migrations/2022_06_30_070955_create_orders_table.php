@@ -13,6 +13,7 @@ $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('casc
 $table->string('token');
 $table->string('date');
 $table->tinyInteger('status')->default(0);
+$table->float('total');
 $table->string('type');
 $table->timestamps();
 });

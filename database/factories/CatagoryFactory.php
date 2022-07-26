@@ -7,7 +7,7 @@ class CatagoryFactory extends Factory
 {
 public function definition()
 {
-$name=$this->faker->name();
+$name=$this->faker->text(15);
 return 
 [
 'name'=>$name,
@@ -18,7 +18,7 @@ return
 'meta_description'=>'Here is your Description',
 'status'=>random_int(0,1),
 'popular'=>random_int(0,1),
-'photo'=>$this->faker->imageUrl($height=200,$weight=200),
+'photo'=>$this->faker->imageUrl($height=200,$width=200),
 ];
 }
 }

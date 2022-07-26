@@ -1,4 +1,4 @@
-@extends('layouts.frontend.app')
+@extends('layouts.admin.app')
 @section('content')
 <style>
 .table tr th, .table tr td
@@ -7,19 +7,16 @@ text-align:center;
 }
 </style>
 <div class="container " style="margin-top:10px;">
-<form action="{{route('place-order')}}">
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-12">
 <div class="card">
-<h3 class="text-primary text-center">Basic Detail</h3>
+<h3 class="text-light text-center">Basic Detail</h3>
 <div class="card-body">
-@if(!$user->isEmpty())
-@foreach($user as $user)
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
 <label for="name">Name :</label>
-<input type="text" value="{{ $user->username }}" name="name" id="name" class="form-control"/>
+<input type="text" value="{{ $user->name }}" name="name" id="name" class="form-control"/>
 @error('name')
 <strong class="text-danger">
 {{ $message }}
@@ -30,7 +27,8 @@ text-align:center;
 <div class="col-md-6">
 <div class="form-group">
 <label for="email">Email :</label>
-<input type="text" name="email" value="{{ $user->useremail }}" id="email" class="form-control"/>
+<input type="text" name="email" value="{{ $user->email }}
+" id="email" class="form-control"/>
 @error('email')
 <strong class="text-danger">
 {{ $message }}
@@ -39,22 +37,13 @@ text-align:center;
 </div>
 </div>
 </div>
-@endforeach
 
-@endif
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
-<label for="country_id">Country :</label>
-<select name="country_id" id="country_id" class="form-control">
-<option value="0">Select A Country</option>
-@foreach($countries as $country)
-<option value="{{ $country->id }}">
-{{ $country->name }}   
-</option>
-@endforeach
-</select>
-@error('country_id')
+<label for="country">Country :</label>
+<input class="form-control" value="{{$user->country->name}}" type="text" value="">
+@error('country')
 <strong class="text-danger">
 {{ $message }}
 </strong>
@@ -63,16 +52,9 @@ text-align:center;
 </div>
 <div class="col-md-6">
 <div class="form-group">
-<label for="state_id">State :</label>
-<select name="state_id" id="state_id" class="form-control">
-<option value="0">Select A State</option>
-@foreach($states as $state)
-<option value="{{ $state->id }}">
-{{ $state->name }}   
-</option>
-@endforeach
-</select>
-@error('state_id')
+<label for="city">City :</label>
+<input type="text" name="city" id="city" value="{{ $user->city->name }}" class="form-control" />
+@error('city')
 <strong class="text-danger">
 {{ $message }}
 </strong>
@@ -83,27 +65,20 @@ text-align:center;
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
-<label for="city_id">City :</label>
-<select name="city_id" id="city_id" class="form-control">
-<option value="0">Select A City</option>
-@foreach($cities as $city)
-<option value="{{ $city->id }}">
-{{ $city->name }}   
-</option>
-@endforeach
-</select>
-
-@error('city_id')
+<label for="state_id">City :</label>
+<input type="text" name="city_id" id="city_id" value="{{ $user->state->name }}" class="form-control" />
+@error('state')
 <strong class="text-danger">
 {{ $message }}
 </strong>
 @enderror
 </div>
 </div>
+
 <div class="col-md-6">
 <div class="form-group">
 <label for="mobile">Mobile :</label>
-<input type="text" name="mobile" id="mobile" value="{{ $user->usermobile }}" class="form-control"/>
+<input type="text" name="mobile" id="mobile" value="{{ $user->mobile }}" class="form-control"/>
 @error('mobile')
 <strong class="text-danger">
 {{ $message }}
@@ -117,7 +92,7 @@ text-align:center;
 <div class="form-group">
 <label for="address">Address :</label>
 <textarea class="form-control" name="address" id="address"  cols="30" rows="10">
-{{ $user->useraddress }}
+{{ $user->address }}
 </textarea>
 @error('address')
 <strong class="text-danger">
@@ -130,8 +105,12 @@ text-align:center;
 </div>
 </div>
 </div>
-<div class="col-md-6">
+</div>
+<hr>
+<div class="row">
+<div class="col-md-12">
 <div class="card">
+<h3 class="text-center text-light">Order Detail</h3>
 <div class="card-body">
 <table class="table table-bordered">
 <thead>
@@ -154,8 +133,8 @@ Price
 </tr>
 </thead>
 <tbody>
-@if(!$cartItems->isEmpty())
-@foreach($cartItems as $index=>$item)
+@if(!$orders->isEmpty())
+@foreach($orders as $index=>$item)
 <tr>
 <td>
 {{ $index+1 }}    
@@ -182,12 +161,40 @@ Price
 @endif
 </tbody>
 </table>
-<h4 class="mt-5 text-success text-end">Total Price : {{ $totalPrice }}</h4>
-<button class="btn btn-success w-100">Place Order</button>
-</div>
-</div>
-</div>
-</div>
+<br>
+<form method="post" action="{{route('update-order-status',$orderid)}}" >
+@csrf
+@method('PUT')
+<select name="status" id="status" class="form-control form-select">
+<option value="null">
+Select An Option
+</option>
+<option value="0">
+Pending
+</option>
+<option value="1">
+Shipped
+</option>
+<option value="2">
+Delivered
+</option>
+</select>
+@error('status')
+<span class="text-danger">
+{{ $message }}
+</span>
+@enderror
+<br>
+<h4 class="text-success text-end">Total Price : {{ $totalorder }}</h4>
+<button class="btn btn-success w-100" type="submit">
+<strong>
+Update Status
+</strong>    
+</button>
 </form>
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection

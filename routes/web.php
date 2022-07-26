@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\UserController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -35,6 +37,14 @@ Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout-inde
 // Place user order 
 Route::get('/place/order',[CheckoutController::class,'placeOrder'])->name('place-order');
 
+// Route for user to update their profile
+Route::get('/user/detail/{id}',[UserController::class,'userDetail'])->name('get-user-detail');
+Route::put('/user/update/profile/{id}',[UserController::class,'updateProfile'])->name('update-user-profile');
+Route::put('/user/update/password',[UserController::class,'updatePassword'])->name('update-user-password');
+Route::put('/user/update/photo',[UserController::class,'updatePhoto'])->name('update-user-photo');
+
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -58,4 +68,15 @@ Route::post('/product/store',[ProductController::class,'store'])->name('product-
 Route::get('/product/delete/{id}',[ProductController::class,'destroy'])->name('product-delete');
 Route::get('/product/edit/{id}',[ProductController::class,'edit'])->name('product-edit');
 Route::put('/product/update/{id}',[ProductController::class,'update'])->name('product-update');
+
+// Routes for order by admin
+Route::get('/order/pending',[OrderController::class,'orderPending'])->name('order-pending');
+Route::get('/order/shipped',[OrderController::class,'orderShipped'])->name('order-shipped');
+Route::get('/order/delivered',[OrderController::class,'orderDelivered'])->name('order-delivered');
+Route::get('/order/{id}',[OrderController::class,'orderDetail'])->name('order-detail');
+Route::put('/order/status/{id}',[OrderController::class,'updateOrder'])->name('update-order-status');
+
+// Routes for user by admin side
+Route::get('/user',[UserController::class,'index'])->name('user-index');
+
 });

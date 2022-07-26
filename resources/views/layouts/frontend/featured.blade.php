@@ -11,7 +11,7 @@
 @foreach($products as $product)
 <div class="item">
 <div class="card">
-<img src="{{asset('storage/productPhoto/'.$product->photo)}}" class="img-thumbnail" alt="">
+<img src="{{asset($product->photo)}}" class="img-thumbnail" alt="">
 </div>
 <div class="card-body">
 <h5 class="text-center text-primary">{{substr($product->name,0,14) }}</h5>
@@ -37,7 +37,7 @@ RS : {{$product->selling_price}}
 @foreach($catagories as $catagory)
 <div class="item">
 <div class="card">
-<img src="{{asset('storage/catagoryPhoto/'.$catagory->photo)}}" class="img-thumbnail" alt="">
+<img src="{{asset($catagory->photo)}}" class="img-thumbnail" alt="">
 </div>
 <div class="card-body">
   <!-- Length of catagory not exceeds than 14-->

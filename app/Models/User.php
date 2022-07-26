@@ -7,7 +7,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
-
+use App\Models\Country;
+use App\Models\User;
+use App\Models\State;
 
 class User extends Authenticatable
 {
@@ -16,10 +18,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'country',
-        'city',
-        'state', 
-        'address',
+        'role_id',
+        'country_id',
+        'city_id',
+        'state_id', 
+        'address_id',
         'mobile'
     ];
 
@@ -61,5 +64,21 @@ public function checkRole()
 public function products()
 {
 return $this->belongsToMany(Product::class,'carts','user_id','product_id');
+}
+// Each user belongs to a country
+public function country()
+{
+return $this->belongsTo(Country::class);
+}
+
+// Each user belongs to a city
+public function city()
+{
+return $this->belongsTo(City::class);
+}
+// Each user belongs to a state
+public function state()
+{
+return $this->belongsTo(State::class);
 }
 }

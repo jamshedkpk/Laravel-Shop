@@ -15,7 +15,7 @@
 </div>
 <div class="col-md-4">
 @if($product->photo)
-<img class="img-responsive float-end" style="border:1px solid white;border-radius:10px;" height="150px;" src="{{asset('storage/productPhoto/'.$product->photo)}}" alt="">
+<img class="img-responsive float-end" style="border:1px solid white;border-radius:10px;" height="150px;" src="{{asset($product->photo)}}" alt="">
 @endif
 </div>
 </div>

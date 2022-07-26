@@ -137,8 +137,9 @@ font-size:20px !important;
 </a>
 <div class="collapse" id="user-ui">
   <ul class="nav flex-column sub-menu">
-    <li class="nav-item {{ Request::is('user') ? 'active' : '' }} "> <a class="nav-link">View Users</a></li>
-    <li class="nav-item {{ Request::is('user/create') ? 'active' : '' }}"> <a class="nav-link">Add User</a></li>
+    <li class="nav-item {{ Request::is('user') ? 'active' : '' }} "> <a class="nav-link" href="{{route('user-index')}}">
+      View Users
+    </a></li>
   </ul>
 </div>
 </li>
@@ -190,7 +191,21 @@ font-size:20px !important;
   </ul>
 </div>
 </li>
-
+<li class="nav-item menu-items">
+<a class="nav-link" data-bs-toggle="collapse" href="#order-ui" aria-expanded="false" aria-controls="ui-basic">
+  <span class="menu-icon">
+    <i class="mdi mdi-note-plus"></i>
+  </span>
+  <span class="menu-title">Order Managment</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="order-ui">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item {{ Request::is('order') ? 'active' : '' }}"> <a class="nav-link" href="{{route('order-pending')}}">View Orders</a></li>
+    <li class="nav-item {{ Request::is('order/create') ? 'active' : '' }}"> <a class="nav-link" href="{{route('product-create')}}">Update Orders</a></li>
+  </ul>
+</div>
+</li>
 </ul>
 </nav>
 <!-- partial -->

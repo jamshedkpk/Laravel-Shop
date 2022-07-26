@@ -81,7 +81,7 @@ Delete
 {{ $product->selling_price }}
 </td>
 <td>
-<img id="productPhoto" src="{{asset('storage/productPhoto/'.$product->photo)}}" alt="">
+<img id="productPhoto" src="{{asset($product->photo)}}" alt="">
 </td>
 <td>
 {{ $product->quantity }}
