@@ -37,11 +37,12 @@ Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout-inde
 // Place user order 
 Route::get('/place/order',[CheckoutController::class,'placeOrder'])->name('place-order');
 
-// Route for user to update their profile
-Route::get('/user/detail/{id}',[UserController::class,'userDetail'])->name('get-user-detail');
-Route::put('/user/update/profile/{id}',[UserController::class,'updateProfile'])->name('update-user-profile');
-Route::put('/user/update/password',[UserController::class,'updatePassword'])->name('update-user-password');
-Route::put('/user/update/photo',[UserController::class,'updatePhoto'])->name('update-user-photo');
+// Route for user to get and update their profile
+Route::get('/user/profile/{id}',[UserController::class,'viewProfile'])->name('view-user-profile');
+Route::get('/user/edit/profile/{id}',[UserController::class,'editProfile'])->name('edit-user-profile');
+Route::get('/user/edit/password/{id}',[UserController::class,'editPassword'])->name('edit-user-password');
+Route::get('/user/edit/photo/{id}',[UserController::class,'editPhoto'])->name('edit-user-photo');
+Route::put('/user/update/profile/{id}',[userController::class,'updateProfile'])->name('update-user-profile');
 
 
 

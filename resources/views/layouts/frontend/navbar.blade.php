@@ -65,7 +65,7 @@ Register
 @endif
 @else
 <li class="nav-item">
-<a class="nav-link active" aria-current="page" href="{{route('get-user-detail',Auth()->user()->id)}}">
+<a class="nav-link active" aria-current="page" href="{{route('view-user-profile',Auth()->user()->id)}}">
 <strong>
 Profile    
 </strong>

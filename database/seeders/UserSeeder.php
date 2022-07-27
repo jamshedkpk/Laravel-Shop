@@ -28,6 +28,13 @@ User::create([
 'email'=>'user@gmail.com',
 'role_id'=>2,
 'password'=>Hash::make('admin'),
+'country_id'=>1,
+'city_id'=>4,
+'state_id'=>7,
+'address'=>'Village Council Behram Khel',
+'mobile'=>3469044990,
+'photo'=>'Photo is here',
+'status'=>1
 ]);
 }
 
